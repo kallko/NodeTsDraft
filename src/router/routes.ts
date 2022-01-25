@@ -10,24 +10,23 @@ router.route("/").get(function (req: express.Request, res: express.Response) {
     console.error("ERROR " + e + e.stack);
   }
 });
-//todo change to POST
 router
   .route("/register")
-  .get(function (req: express.Request, res: express.Response) {
+  .post(async function (req: express.Request, res: express.Response) {
     try {
-      userController.createUser(req.body);
-      res.json({ response: "test route success ", time: serverStartTime });
+      const result = await userController.createUser(req.body);
+      res.json(result);
     } catch (e: any) {
       console.error("ERROR " + e + e.stack);
     }
   });
 
-//todo change to POST
 router
   .route("/login")
-  .get(function (req: express.Request, res: express.Response) {
+  .post(async function (req: express.Request, res: express.Response) {
     try {
-      res.json({ response: "test route success", time: serverStartTime });
+      const result = await userController.login(req.body);
+      res.json(result);
     } catch (e: any) {
       console.error("ERROR " + e + e.stack);
     }
