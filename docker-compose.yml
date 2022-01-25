@@ -1,5 +1,5 @@
 services:
-  cognity_server:
+  quiz_server:
     build:
       context: .
     volumes:
