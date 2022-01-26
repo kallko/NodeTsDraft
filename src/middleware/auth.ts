@@ -11,10 +11,10 @@ export const authMiddleware = function (
     whiteList.some((route) => req.originalUrl?.startsWith(route))
   ) {
     // todo find user here
-    req.user = 3;
+    req.user = 1;
     next();
   } else {
     res.status(401);
-    next(new Error("You Are not authorized "));
+    next(new Error("You Are not authorized"));
   }
 };

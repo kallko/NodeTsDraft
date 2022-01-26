@@ -28,7 +28,7 @@ export const quiz2: QuizCreationProps = {
   title: "Star Wars 5",
   questions: [
     {
-      text: "Where was rebel's base?",
+      text: "Where was rebel's base hidden?",
       answers: [
         {
           text: "planet Nabu",

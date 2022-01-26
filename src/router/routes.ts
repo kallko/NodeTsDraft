@@ -2,6 +2,7 @@ import * as express from "express";
 import { userController } from "../controller/userController";
 import { quizController } from "../controller/quizController";
 import { quizService } from "../service/quizService";
+import { statisticController } from "../controller/statisticController";
 const router = express.Router();
 const serverStartTime = new Date();
 
@@ -84,6 +85,7 @@ router
     }
   });
 
+// todo try to remove ! after middleware
 router
   .route("/quiz/:id/answer")
   .post(async function (req: express.Request, res: express.Response) {
@@ -91,6 +93,7 @@ router
       const result = await quizController.checkAnswers({
         id: req.params.id,
         answerIds: req.body,
+        authorId: req.user!,
       });
       res.json(result);
     } catch (e: any) {
@@ -100,9 +103,10 @@ router
 
 router
   .route("/user/statistic")
-  .get(function (req: express.Request, res: express.Response) {
+  .get(async function (req: express.Request, res: express.Response) {
     try {
-      res.json({ response: "test route success", time: serverStartTime });
+      const result = await statisticController.getStatisticForUser(req.user!);
+      res.json({ response: "test route success ", result });
     } catch (e: any) {
       console.error("ERROR " + e + e.stack);
     }

@@ -1,5 +1,6 @@
 import { Answer, Question, Quiz } from "../@type/quiz";
 import { quizService } from "../service/quizService";
+import { statisticController } from "./statisticController";
 
 export const quizController = {
   async create(options: { userId: number; quiz: Quiz }) {
@@ -14,8 +15,12 @@ export const quizController = {
     });
     return result;
   },
-  async checkAnswers(options: { id: string; answerIds: number[] }) {
-    const { id, answerIds } = options;
+  async checkAnswers(options: {
+    answerIds: any;
+    id: string;
+    authorId: number;
+  }) {
+    const { id, answerIds, authorId } = options;
 
     const quiz = await quizService.getById(id);
     // todo move to statistic controller
@@ -28,6 +33,13 @@ export const quizController = {
       if (answerIds[index] && question.answers[answerIds[index] - 1]?.correct) {
         result.score++;
       }
+    });
+    console.log("Result Answer ", result);
+    await statisticController.createStatistic({
+      authorId,
+      quizId: id,
+      score: result.score,
+      questions: result.questions || 0,
     });
     return result;
   },
