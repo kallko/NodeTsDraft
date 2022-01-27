@@ -85,9 +85,8 @@ router
     }
   });
 
-// todo try to remove ! after middleware
 router
-  .route("/quiz/:id/answer")
+  .route("/quiz/answer/:id")
   .post(async function (req: express.Request, res: express.Response) {
     try {
       const result = await quizController.checkAnswers({
@@ -97,7 +96,7 @@ router
       });
       res.json(result);
     } catch (e: any) {
-      console.error("ERROR " + e + e.stack);
+      console.error("ERROR" + e + e.stack);
     }
   });
 
@@ -108,20 +107,8 @@ router
       const result = await statisticController.getStatisticForUser(req.user!);
       res.json({ response: "test route success ", result });
     } catch (e: any) {
-      console.error("ERROR " + e + e.stack);
+      console.error("ERROR" + e + e.stack);
     }
   });
-
-router.route("/").post(function (req: express.Request, res: express.Response) {
-  try {
-    res.json({
-      response: "main route success",
-      time: serverStartTime,
-      method: "Post",
-    });
-  } catch (e: any) {
-    console.error("ERROR " + e + e.stack);
-  }
-});
 
 module.exports = router;
