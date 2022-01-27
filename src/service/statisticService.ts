@@ -10,7 +10,6 @@ export const statisticService = {
     await new StatisticModel({ quizId, questions, authorId, score }).save();
   },
   async getByAuthorId(authorId: number): Promise<Statistic[]> {
-    console.log("Test1");
     return StatisticModel.find({ authorId });
   },
 };

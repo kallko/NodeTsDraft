@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 
 import { userService } from "../service/userService";
 import { LoginData, UserCreationProps } from "../@type/user";
+import { tokenController } from "./tokenController";
 interface LoginResult {
   success: boolean;
   token?: string;
@@ -18,10 +19,10 @@ export const userController = {
     if (user) {
       const isPasswordCorrect = await bcrypt.compare(password, user?.password);
       if (isPasswordCorrect) {
+        const result = await tokenController.create(user.id);
         return {
           success: true,
-          // todo createToken
-          token: "1234",
+          token: result.token,
         };
       } else {
         return {

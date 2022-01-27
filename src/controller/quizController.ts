@@ -34,7 +34,6 @@ export const quizController = {
         result.score++;
       }
     });
-    console.log("Result Answer ", result);
     await statisticController.createStatistic({
       authorId,
       quizId: id,
