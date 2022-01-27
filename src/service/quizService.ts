@@ -13,7 +13,6 @@ const QuizModel = mongoose.model<Quiz>("Quiz", QuizSchema);
 
 export const quizService = {
   async create(quiz: Quiz) {
-    // todo validate and transform
     quiz.questions.forEach((question) =>
       question.answers.forEach(
         (answer) => (answer.correct = answer.correct === "true")
