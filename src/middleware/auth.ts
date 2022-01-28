@@ -14,7 +14,7 @@ export const authMiddleware = async function (
   if (userToken || noAuthRoute) {
     if (userToken && !noAuthRoute) {
       const token = await tokenController.getByToken(userToken);
-      if (token || !isActive(token)) {
+      if (token && isActive(token)) {
         req.user = token?.userId;
         await tokenController.updateToken(token!);
       } else {

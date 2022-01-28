@@ -41,18 +41,18 @@ router
   .route("/quiz/create")
   .post(async function (req: express.Request, res: express.Response) {
     try {
-      const result = await quizController.create({
+      await quizController.create({
         userId: req.user!,
         quiz: req.body,
       });
-      res.json({ response: "test route success", result });
+      res.json({ response: "Quiz created" });
     } catch (e: any) {
       console.error("ERROR  " + e + e.stack);
     }
   });
 
 router
-  .route("/quiz")
+  .route("/quiz/list")
   .get(async function (req: express.Request, res: express.Response) {
     try {
       const result = await quizService.getQuizForUser(req.user || 0);

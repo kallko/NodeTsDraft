@@ -5,11 +5,9 @@ import { userService } from "./userService";
 export function setupMongoose(): void {
   connect("mongodb://172.21.0.1:27017/Quiz", {})
     .then(async (_db) => {
-      console.log("DB Connected", _db);
       const userCount = (await userService.getNewIdForUser()) - 1;
-      console.log("User count ", userCount);
       if (userCount === 0) {
-        console.log("First start. Let add initial data. ");
+        console.log("First start. Let add initial data.");
         await initData.addData();
       }
     })

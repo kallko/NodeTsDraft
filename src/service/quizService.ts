@@ -3,10 +3,14 @@ import * as mongoose from "mongoose";
 import { QuizSchema } from "./schema/quiz";
 const ObjectId = require("mongodb").ObjectId;
 
-const adminProjection = {
+const deleteProjection = {
   _id: 1,
   title: 1,
   questions: 1,
+};
+const adminProjection = {
+  _id: 1,
+  title: 1,
 };
 
 const QuizModel = mongoose.model<Quiz>("Quiz", QuizSchema);
@@ -28,7 +32,7 @@ export const quizService = {
   async delete(authorId: number, _id: string) {
     const quiz = await QuizModel.findOne(
       { _id: ObjectId(_id), authorId },
-      adminProjection
+      deleteProjection
     );
     if (!quiz) {
       return { success: false };
@@ -39,9 +43,7 @@ export const quizService = {
   async getQuizForUser(authorId: number) {
     return QuizModel.find(
       {
-        authorId: {
-          $ne: authorId,
-        },
+        authorId,
       },
       adminProjection
     );

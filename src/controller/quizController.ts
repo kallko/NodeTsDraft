@@ -10,7 +10,7 @@ export const quizController = {
   },
   async getQuizForPlay(authorId: number) {
     const result = await quizService.getQuizExcludeAuthor(authorId);
-    result?.[0].questions?.forEach((question: Question) => {
+    result?.[0]?.questions?.forEach((question: Question) => {
       question.answers?.forEach((answer: Answer) => delete answer?.correct);
     });
     return result;
