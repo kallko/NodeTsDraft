@@ -5,7 +5,7 @@ export const StatisticSchema = new Schema(
   {
     quizId: { type: String },
     questions: { type: Number },
-    authorId: { type: String, index: true },
+    authorId: { type: String },
     score: { type: Number },
   },
   { strict: true }

@@ -1,5 +1,5 @@
 import { Quiz } from "../@type/quiz";
-import mongoose from "mongoose";
+import * as mongoose from "mongoose";
 import { QuizSchema } from "./schema/quiz";
 const ObjectId = require("mongodb").ObjectId;
 
@@ -25,7 +25,6 @@ export const quizService = {
       _id: ObjectId(_id),
     });
   },
-  // todo check how it works
   async delete(authorId: number, _id: string) {
     const quiz = await QuizModel.findOne(
       { _id: ObjectId(_id), authorId },
@@ -34,8 +33,7 @@ export const quizService = {
     if (!quiz) {
       return { success: false };
     }
-    console.log("Ready to delete quiz  ", quiz);
-    // return quiz.deleteOne();
+    await quiz.deleteOne();
     return { success: true };
   },
   async getQuizForUser(authorId: number) {

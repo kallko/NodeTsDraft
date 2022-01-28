@@ -1,17 +1,20 @@
 import { NextFunction, Request, Response } from "express";
 import { validatorHelper as validator } from "../helper/validatorHelper";
+
 const VALIDATION_ALERT = "Data in request not valid. Valid schema: ";
 const LOGIN_SCHEMA = "{ login: string, password: string }";
 const ANSWER_SCHEMA = "number[]";
 const QUIZ_SCHEMA =
   "{ title: string, questions: { text: string, answers: { text: string, correct: false | true }[]}[] At least 1 question. At least 1 answer for every question";
 
+// validate data from POST req.
 export const dataValidateMiddleware = async function (
   req: Request,
   res: Response,
   next: NextFunction
 ) {
   if (req.method === "POST") {
+    // extract :id from route
     let dataValidationRoute = validator.removeMongoDbIdFromReqPath(req.path);
     switch (dataValidationRoute) {
       case "/register":

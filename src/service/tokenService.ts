@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import * as mongoose from "mongoose";
 import { TokenSchema } from "./schema/token";
 import { Token } from "../@type/token";
 const TokenModel = mongoose.model<Token>("Token", TokenSchema);

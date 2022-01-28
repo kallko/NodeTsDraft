@@ -13,6 +13,7 @@ export const tokenController = {
   async getByToken(token: string) {
     return tokenService.getByToken(token);
   },
+  // update token after every action from user. to have possibility auto-logout after 1 hour without actions
   async updateToken(token: Token) {
     await tokenService.delete(token.userId);
     return tokenService.create({ token: token.token, userId: token.userId });

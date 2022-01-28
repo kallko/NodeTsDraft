@@ -1,8 +1,8 @@
 import bcrypt from "bcryptjs";
-
 import { userService } from "../service/userService";
 import { LoginData, UserCreationProps } from "../@type/user";
 import { tokenController } from "./tokenController";
+
 interface LoginResult {
   success: boolean;
   token?: string;

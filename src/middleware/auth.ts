@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { tokenController } from "../controller/tokenController";
-const whiteList = ["/register", "/login"];
+
+const whiteList = ["/register", "/login", "/"];
 const AUTO_LOGOUT_TIME = 60 * 60 * 1000;
 
 export const authMiddleware = async function (
@@ -9,9 +10,7 @@ export const authMiddleware = async function (
   next: NextFunction
 ) {
   const userToken = req.headers?.["x-api-key"]?.toString();
-  const noAuthRoute = whiteList.some((route) =>
-    req.originalUrl?.startsWith(route)
-  );
+  const noAuthRoute = whiteList.some((route) => req.originalUrl === route);
   if (userToken || noAuthRoute) {
     if (userToken && !noAuthRoute) {
       const token = await tokenController.getByToken(userToken);
@@ -30,6 +29,7 @@ export const authMiddleware = async function (
   }
 };
 
+// auto logout after 1 hour without action
 const isActive = (token: any) => {
   return (
     token &&

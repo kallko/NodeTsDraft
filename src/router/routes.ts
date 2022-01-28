@@ -3,16 +3,18 @@ import { userController } from "../controller/userController";
 import { quizController } from "../controller/quizController";
 import { quizService } from "../service/quizService";
 import { statisticController } from "../controller/statisticController";
+
 const router = express.Router();
 const serverStartTime = new Date();
 
 router.route("/").get(function (req: express.Request, res: express.Response) {
   try {
-    res.json({ response: "main route success", time: serverStartTime });
+    res.json({ response: "Main route success", serverStartTime });
   } catch (e: any) {
     console.error("ERROR " + e + e.stack);
   }
 });
+
 router
   .route("/register")
   .post(async function (req: express.Request, res: express.Response) {
@@ -38,12 +40,9 @@ router
 router
   .route("/quiz/create")
   .post(async function (req: express.Request, res: express.Response) {
-    if (!req["user"]) {
-      throw new Error("You Are not authorized");
-    }
     try {
       const result = await quizController.create({
-        userId: req["user"],
+        userId: req.user!,
         quiz: req.body,
       });
       res.json({ response: "test route success", result });
@@ -105,7 +104,7 @@ router
   .get(async function (req: express.Request, res: express.Response) {
     try {
       const result = await statisticController.getStatisticForUser(req.user!);
-      res.json({ response: "test route success ", result });
+      res.json(result);
     } catch (e: any) {
       console.error("ERROR" + e + e.stack);
     }

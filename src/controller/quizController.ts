@@ -10,8 +10,8 @@ export const quizController = {
   },
   async getQuizForPlay(authorId: number) {
     const result = await quizService.getQuizExcludeAuthor(authorId);
-    result?.[0].questions.forEach((question: Question) => {
-      question.answers.forEach((answer: Answer) => delete answer.correct);
+    result?.[0].questions?.forEach((question: Question) => {
+      question.answers?.forEach((answer: Answer) => delete answer?.correct);
     });
     return result;
   },
@@ -21,14 +21,17 @@ export const quizController = {
     authorId: number;
   }) {
     const { id, answerIds, authorId } = options;
-
     const quiz = await quizService.getById(id);
-    // todo move to statistic controller
-    // todo if no quiz?
+    if (!quiz) {
+      return {
+        errorMessage: `Quiz with id: ${id} not exists.`,
+      };
+    }
     const result = {
       score: 0,
       questions: quiz?.questions.length,
     };
+    // Calculate score. normalize id for answers. First answer has index 0. etc.
     quiz?.questions.forEach((question, index) => {
       if (answerIds[index] && question.answers[answerIds[index] - 1]?.correct) {
         result.score++;
