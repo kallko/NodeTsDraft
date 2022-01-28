@@ -1,6 +1,5 @@
 import { connect } from "mongoose";
 import { initData } from "./migrations/initData";
-import { UserSchema } from "./schema/user";
 import { userService } from "./userService";
 
 export async function setupMongoose(): Promise<void> {
@@ -9,7 +8,7 @@ export async function setupMongoose(): Promise<void> {
     const userCount = (await userService.getNewIdForUser()) - 1;
     console.log("User count ", userCount);
     if (userCount === 0) {
-      console.log("First start. Let add initial data. ");
+      console.log("First start. Let add initial data.");
       await initData.addData();
     }
   } catch (err) {
