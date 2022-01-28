@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "dev": "ts-node-dev --respawn --pretty --transpile-only src/app.ts",
-    "start": "ts-node-dev --respawn --pretty --transpile-only src/app.ts",
+    "start": "ts-node-dev --transpile-only src/app.ts",
     "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' NODE_ENV=TEST mocha --require ts-node/register 'test/*.test.ts'"
   },
   "keywords": [],
