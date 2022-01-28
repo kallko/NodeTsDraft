@@ -3,8 +3,8 @@ Installation
 you should have installed global git and docker
 
 ```
-mkdir Absence
-cd Absence
+mkdir absence
+cd absence
 git init
 git clone https://github.com/kallko/NodeTsDraft.git
 cd NodeTsDraft/
