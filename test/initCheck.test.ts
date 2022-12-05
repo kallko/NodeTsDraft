@@ -1,9 +1,25 @@
-import { dataController } from "../src/controller/dataController";
+import { dataForTests } from "./dataForTests";
 import { expect } from "chai";
 
-describe("init Check test for dataController", () => {
-  it("check testFunction in dataController ", () => {
-    const result = dataController.testFunction(5);
-    expect(result).deep.equal(10);
+describe("Check data for Testing", () => {
+  it("users length should be 3", () => {
+    const result = dataForTests.users;
+    expect(result.length).deep.equal(3);
+  });
+  it("artists length should be 3", () => {
+    const result = dataForTests.artists;
+    expect(result.length).deep.equal(3);
+  });
+  it("albums length should be 9", () => {
+    const result = dataForTests.albums;
+    expect(result.length).deep.equal(9);
+  });
+  it("ratings ratings should be 27", () => {
+    const result = dataForTests.ratings;
+    expect(result.length).deep.equal(27);
+  });
+  it("collections ratings should be 4", () => {
+    const result = dataForTests.collections;
+    expect(result.length).deep.equal(4);
   });
 });
