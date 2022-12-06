@@ -3,6 +3,10 @@ import { Album, Artist, Collection, Rating, User } from "../src/@type";
 export const dataForTests = {
   users: [
     {
+      id: 1,
+      name: "Brent",
+    },
+    {
       id: 2,
       name: "Andrii",
     },
