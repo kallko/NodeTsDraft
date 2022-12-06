@@ -1,4 +1,5 @@
 import { dataForTests } from "./dataForTests";
+import { dataController } from "../src/controller/dataController";
 import { expect } from "chai";
 
 describe("Check data for Testing", () => {
@@ -21,5 +22,20 @@ describe("Check data for Testing", () => {
   it("collections ratings should be 4", () => {
     const result = dataForTests.collections;
     expect(result.length).deep.equal(4);
+  });
+});
+
+describe("Check data controler", () => {
+  describe("getTop3Albums()", () => {
+    it("returns an array of albums", () => {
+      const result = dataController.getTop3Albums([], []);
+      expect(Array.isArray(result)).equal(true);
+    });
+  });
+  describe("getAlbumRating", () => {
+    it("should return 7 when albumId === 1", () => {
+      const result = dataController.getAlbumRating(1, dataForTests.ratings);
+      expect(result).equal(8);
+    });
   });
 });
