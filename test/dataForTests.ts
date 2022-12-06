@@ -1,21 +1,19 @@
+import { Album, Artist, Collection, Rating, User } from "../src/@type";
+
 export const dataForTests = {
   users: [
-    {
-      id: 1,
-      name: "Brent",
-    },
     {
       id: 2,
       name: "Andrii",
     },
-    {
+    <User>{
       id: 3,
       name: "David",
     },
   ],
   artists: [
     { id: 1, lastName: "Scorpions", birth: "01.01.1965" },
-    {
+    <Artist>{
       id: 2,
       lastName: "Presley",
       firstName: "Elvis Aaron",
@@ -45,7 +43,7 @@ export const dataForTests = {
       year: 1979,
       duration: 36.49,
     },
-    {
+    <Album>{
       id: 3,
       title: "Blackout",
       artists: [1],
@@ -96,7 +94,7 @@ export const dataForTests = {
     },
   ],
   ratings: [
-    { id: 1, albumId: 1, userId: 1, rating: 5 },
+    <Rating>{ id: 1, albumId: 1, userId: 1, rating: 5 },
     { id: 1, albumId: 2, userId: 1, rating: 2 },
     { id: 1, albumId: 3, userId: 1, rating: 3 },
     { id: 1, albumId: 4, userId: 1, rating: 1 },
@@ -125,7 +123,7 @@ export const dataForTests = {
     { id: 1, albumId: 9, userId: 3, rating: 1 },
   ],
   collections: [
-    { id: 1, userId: 1, albums: [1, 3, 7], title: "Romantic" },
+    <Collection>{ id: 1, userId: 1, albums: [1, 3, 7], title: "Romantic" },
     { id: 2, userId: 2, albums: [2, 4, 6], title: "Some" },
     { id: 3, userId: 3, albums: [1, 2, 7], title: "Moon" },
     { id: 4, userId: 1, albums: [5, 6, 7], title: "Stark" },
