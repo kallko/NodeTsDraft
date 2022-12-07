@@ -35,7 +35,7 @@ describe("Check data controler", () => {
   describe("getAlbumRating", () => {
     it("should return 7 when albumId === 1", () => {
       const result = dataController.getAlbumRating(1, dataForTests.ratings);
-      expect(result).equal(8);
+      expect(result).equal(7);
     });
   });
 });
